@@ -1,5 +1,5 @@
 from fastapi import UploadFile
-import PyPDF2
+from pypdf import PdfReader
 from docx import Document
 import io
 
@@ -26,7 +26,7 @@ class FileProcessor:
         """
         try:
             pdf_file = io.BytesIO(content)
-            pdf_reader = PyPDF2.PdfReader(pdf_file)
+            pdf_reader = PdfReader(pdf_file)
             
             text = ""
             for page in pdf_reader.pages:
