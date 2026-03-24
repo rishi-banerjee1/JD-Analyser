@@ -2,6 +2,17 @@
 
 A smart application that enables recruiters to refine job descriptions for clarity, inclusivity, and industry alignment. The application dynamically enhances JDs by analyzing structure, language biases, readability, and SEO performance.
 
+**Live**: [jdbuilder.vercel.app](https://jdbuilder.vercel.app)
+
+---
+
+## Why This Exists
+
+- Job descriptions are often written with unconscious bias, unclear structure, and poor SEO
+- Recruiters spend hours manually reviewing and rewriting JDs
+- No lightweight tool existed for Atlan-specific JD standards and branding
+- Readability and inclusivity analysis is typically manual and inconsistent
+
 ## Features
 
 - Multiple input methods (text, file upload, structured form)
@@ -13,64 +24,48 @@ A smart application that enables recruiters to refine job descriptions for clari
 
 ## Tech Stack
 
-- Backend: Python FastAPI
-- Frontend: React with TypeScript
-- Database: PostgreSQL
-- AI/ML: OpenAI GPT-4
-- Authentication: JWT
+- **Frontend**: React + TypeScript + Vite + Material UI
+- **Backend**: Python FastAPI
+- **Database**: PostgreSQL (Supabase)
+- **AI/ML**: HuggingFace Inference API (facebook/bart-large-cnn)
+- **Auth**: JWT
+- **Hosting**: Vercel (frontend) + Render/Railway (backend)
 
-## Setup Instructions
+## Quick Start
 
-### Backend Setup
+### Backend
 
-1. Create a virtual environment:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-2. Install dependencies:
-```bash
+python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-```
-
-3. Set up environment variables:
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
-
-4. Run the backend:
-```bash
+cp .env.example .env  # Edit with your credentials
 uvicorn app.main:app --reload
 ```
 
-### Frontend Setup
+### Frontend
 
-1. Navigate to the frontend directory:
 ```bash
 cd frontend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
-
-3. Run the development server:
-```bash
 npm run dev
 ```
 
+Frontend runs on `http://localhost:3000`, backend on `http://localhost:8000`.
+
 ## Environment Variables
 
-Create a `.env` file with the following variables:
+Create a `.env` file in the project root:
 
 ```
 DATABASE_URL=postgresql://user:password@localhost:5432/jd_analyzer
-OPENAI_API_KEY=your_openai_api_key
+HUGGINGFACE_API_KEY=your_huggingface_api_key
 JWT_SECRET=your_jwt_secret
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+ALLOWED_ORIGINS=http://localhost:3000
 ```
+
+The frontend uses `VITE_API_BASE_URL` in `frontend/.env.production` to point to the backend API.
 
 ## API Documentation
 
@@ -78,10 +73,13 @@ Once the backend is running, visit:
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 
-## Contributing
+## Deployment
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request 
+| Component | Platform | URL |
+|-----------|----------|-----|
+| Frontend  | Vercel   | [jdbuilder.vercel.app](https://jdbuilder.vercel.app) |
+| Backend   | Render   | `jd-analyzer-backend.onrender.com/api` |
+
+## License
+
+MIT
