@@ -23,7 +23,7 @@ services:
       - key: DEBUG
         value: False
       - key: ALLOWED_ORIGINS
-        value: https://intassist.vercel.app
+        value: https://jdbuilder.vercel.app
       - key: PYTHONUNBUFFERED
         value: 1
       - key: PYTHONPATH

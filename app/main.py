@@ -63,7 +63,7 @@ app = FastAPI(
 )
 
 # Get allowed origins from environment variable
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "https://intassist.vercel.app").split()
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "https://jdbuilder.vercel.app").split()
 
 # Configure CORS with more specific settings
 app.add_middleware(
